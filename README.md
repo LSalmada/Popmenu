@@ -1,24 +1,51 @@
-# README
+# Menu Management System
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Project Overview
+This is a Ruby on Rails application for managing restaurant menus, supporting multiple restaurants and menus with unique menu items.
 
-Things you may want to cover:
+## Setup Instructions
 
-* Ruby version
+### Prerequisites
+- Ruby 3.3.1
+- Rails 8.0.2
+- PostgreSQL
 
-* System dependencies
+### Installation Steps
+1. Clone the repository
+2. Run `bundle install`
+3. Configure your database in `config/database.yml`
+4. Run database migrations:
+   ```
+   rails db:create
+   rails db:migrate
+   ```
+5. Start the server:
+   ```
+   rails server
+   ```
 
-* Configuration
+## Project Levels
 
-* Database creation
+### Level 1: Basics
+- Created Menu and MenuItem models
+- Established relationships
+- Created API endpoints for menus
 
-* Database initialization
+### Level 2: Multiple Menus
+- Added Restaurant model
+- Implemented multi-menu support
+- Ensured unique MenuItem names per menu
 
-* How to run the test suite
+### Level 3: JSON Import
+- Will implement JSON import functionality
+- Add conversion tool for restaurant_data.json
 
-* Services (job queues, cache servers, search engines, etc.)
+## Running Tests
+```
+rails test
+```
 
-* Deployment instructions
-
-* ...
+## Design Considerations
+- Used namespaced API controllers
+- Implemented validation at the model level
+- Designed for future extensibility
