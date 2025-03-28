@@ -109,6 +109,8 @@ GEM
     erubi (1.13.1)
     et-orbi (1.2.11)
       tzinfo
+    faker (3.5.1)
+      i18n (>= 1.8.11, < 2)
     fugit (1.11.1)
       et-orbi (~> 1, >= 1.2.11)
       raabro (~> 1.4)
@@ -347,6 +349,9 @@ GEM
     thruster (0.1.12-x86_64-darwin)
     thruster (0.1.12-x86_64-linux)
     timeout (0.4.3)
+    tty-cursor (0.7.1)
+    tty-spinner (0.9.3)
+      tty-cursor (~> 0.7)
     turbo-rails (2.0.13)
       actionpack (>= 7.1.0)
       railties (>= 7.1.0)
@@ -388,6 +393,7 @@ DEPENDENCIES
   brakeman
   capybara
   debug
+  faker
   importmap-rails
   jbuilder
   kamal
@@ -404,6 +410,7 @@ DEPENDENCIES
   stimulus-rails
   tailwindcss-rails
   thruster
+  tty-spinner
   turbo-rails
   tzinfo-data
   web-console
