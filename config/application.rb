@@ -18,6 +18,9 @@ module Popmenu
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks])
 
+    # Auto generate tests using rspec instead of minitest
+    config.generators.test_framework = :rspec
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

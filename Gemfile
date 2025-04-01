@@ -60,6 +60,9 @@ group :development, :test do
 
   # It's a library for generating fake data such as names, addresses, and phone numbers.
   gem "faker"
+
+  # Test suite
+  gem "rspec-rails", "~> 7.0.0"
 end
 
 group :development do
