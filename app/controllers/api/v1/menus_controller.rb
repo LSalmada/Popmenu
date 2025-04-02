@@ -42,7 +42,9 @@ module Api
       end
 
       def menu_params
-        params.require(:menu).permit(:name, :description)
+        params.require(:menu).permit(:name, :description, :available, menu_items_attributes: [
+          :name, :description, :price, :available, :menu_id
+        ])
       end
     end
   end
