@@ -18,8 +18,6 @@ Rails.application.routes.draw do
       resources :menus do
         resources :menu_items, shallow: true
       end
-
-      resources :menu_items, only: [:show, :update, :destroy]
     end
   end
 end
