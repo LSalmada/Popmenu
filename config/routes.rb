@@ -16,8 +16,10 @@ Rails.application.routes.draw do
     namespace :v1 do
       # Nested routes for menus and menu items
       resources :menus do
-        resources :menu_items
+        resources :menu_items, shallow: true
       end
+
+      resources :menu_items, only: [:show, :update, :destroy]
     end
   end
 end
