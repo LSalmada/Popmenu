@@ -50,8 +50,8 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Lint code for consistent style
-        run: bin/rubocop -f github
+      - name: Standard Ruby
+        uses: standardrb/standard-ruby-action@v1
 
   test:
     runs-on: ubuntu-latest
@@ -90,7 +90,7 @@ jobs:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432
           # REDIS_URL: redis://localhost:6379/0
-        run: bin/rails db:test:prepare test test:system
+        run: bin/rails db:test:prepare && bin/rspec
 
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v4
