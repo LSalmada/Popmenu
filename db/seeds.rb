@@ -2,7 +2,7 @@
 
 puts "🌱 Seeding database..."
 
-# Listas de nomes
+# Name list
 restaurant_names = ["Ocean Breeze", "Firewood Grill", "Golden Fork"]
 menu_names = ["Lunch Specials", "Dinner Delights"]
 menu_item_names = [
@@ -17,11 +17,11 @@ menu_item_descriptions = [
   "Rich in taste and crafted to perfection."
 ]
 
-# Criar restaurantes
+# Create restaurants
 restaurant_names.each do |name|
   restaurant = Restaurant.create!(name: name)
 
-  # Criar menus (2 para cada restaurante)
+  # Create menus, two per restaurant
   menus = menu_names.map do |menu_name|
     restaurant.menus.create!(
       name: menu_name,
@@ -30,7 +30,7 @@ restaurant_names.each do |name|
     )
   end
 
-  # Criar pelo menos 6 itens no menu e garantir que os mesmos possam estar em ambos os menus do restaurante
+  # Create at least 6 menu items and ensure that they can be on both restaurant menus
   menu_items_sample = menu_item_names.sample(6)
   menu_items_sample.each do |item_name|
     menu_item = MenuItem.find_or_create_by!(name: item_name) do |item|
@@ -39,7 +39,7 @@ restaurant_names.each do |name|
       item.available = [true, false].sample
     end
 
-    # Adicionar o mesmo item a ambos os menus do restaurante
+    # Add the same item to both restaurant menus
     menus.each do |menu|
       menu.menu_items << menu_item unless menu.menu_items.exists?(menu_item.id)
     end
