@@ -1,4 +1,3 @@
-# app/services/import_service.rb
 class ImportService
   class << self
     def process_file(file)
