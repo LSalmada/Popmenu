@@ -1,50 +1,35 @@
 module Api
   module V1
     class MenusController < ApplicationController
-      before_action :set_menu, only: [:show, :update, :destroy]
+      before_action :set_restaurant, only: [:index, :create]
 
+      # GET /api/v1/restaurants/:restaurant_id/menus
       def index
-        @menus = Menu.all
-        render json: @menus, include: [:menu_items]
+        menus = @restaurant.menus
+        render json: menus, include: [:menu_items]
       end
 
-      def show
-        render json: @menu, include: [:menu_items]
-      end
-
+      # POST /api/v1/restaurants/:restaurant_id/menus
       def create
-        @menu = Menu.new(menu_params)
+        menu = @restaurant.menus.build(menu_params)
 
-        if @menu.save
-          render json: @menu, status: :created
+        if menu.save
+          render json: menu, status: :created
         else
-          render json: {errors: @menu.errors.full_messages}, status: :unprocessable_entity
+          render json: {errors: menu.errors.full_messages}, status: :unprocessable_entity
         end
-      end
-
-      def update
-        if @menu.update(menu_params)
-          render json: @menu
-        else
-          render json: {errors: @menu.errors.full_messages}, status: :unprocessable_entity
-        end
-      end
-
-      def destroy
-        @menu.destroy
-        head :no_content
       end
 
       private
 
-      def set_menu
-        @menu = Menu.find(params[:id])
+      def set_restaurant
+        @restaurant = Restaurant.find(params[:restaurant_id])
+      rescue ActiveRecord::RecordNotFound
+        render json: {error: "Restaurant not found"}, status: :not_found
       end
 
       def menu_params
-        params.require(:menu).permit(:name, :description, :available, menu_items_attributes: [
-          :name, :description, :price, :available, :menu_id
-        ])
+        params.require(:menu).permit(:name, :description, :available)
       end
     end
   end
