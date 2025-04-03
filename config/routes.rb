@@ -4,10 +4,10 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :restaurants do
-        resources :menus, only: [:index, :create]
+        resources :menus, shallow: true
       end
 
-      resources :menu_items, only: [:index, :create]
+      resources :menu_items
     end
   end
 end
