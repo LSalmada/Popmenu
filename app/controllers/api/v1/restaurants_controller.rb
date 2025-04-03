@@ -10,7 +10,7 @@ module Api
           {
             id: restaurant.id,
             name: restaurant.name,
-            menus: restaurant.menus.pluck(:name) # Retorna apenas um array com os nomes dos menus
+            menus: restaurant.menus.pluck(:name)
           }
         }
       end

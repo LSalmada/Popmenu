@@ -5,7 +5,6 @@ module Api
       before_action :set_menu_item, only: [:show, :update, :destroy]
 
       # GET /api/v1/menu_items
-      # GET /api/v1/restaurants/:restaurant_id/menus/:menu_id/menu_items
       def index
         if params[:menu_id]
           menu = Menu.find(params[:menu_id])
@@ -23,7 +22,6 @@ module Api
       end
 
       # POST /api/v1/menu_items
-      # POST /api/v1/restaurants/:restaurant_id/menus/:menu_id/menu_items
       def create
         @menu_item = MenuItem.new(menu_item_params.except(:menu_id))
 
