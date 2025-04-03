@@ -43,7 +43,7 @@ namespace :import do
       puts "CRITICAL ERROR: #{e.message}"
       puts e.backtrace.join("\n")
     ensure
-      file.close if file
+      file&.close
     end
   end
 end
