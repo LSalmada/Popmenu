@@ -1,12 +1,18 @@
 module Api
   module V1
     class MenuItemsController < ApplicationController
-      before_action :set_menu, only: [:index, :create]
+      before_action :set_menu, only: [:create]
       before_action :set_menu_item, only: [:show, :update, :destroy]
 
-      # GET /api/v1/menus/:menu_id/menu_items
+      # GET /api/v1/menu_items
       def index
-        @menu_items = @menu.menu_items
+        if params[:menu_id]
+          menu = Menu.find(params[:menu_id])
+          @menu_items = menu.menu_items.distinct
+        else
+          @menu_items = MenuItem.all
+        end
+
         render json: @menu_items
       end
 
@@ -15,14 +21,15 @@ module Api
         render json: @menu_item
       end
 
-      # POST /api/v1/menus/:menu_id/menu_items
+      # POST /api/v1/menu_items
       def create
-        @menu_item = @menu.menu_items.build(menu_item_params)
+        @menu_item = MenuItem.new(menu_item_params.except(:menu_id))
 
         if @menu_item.save
+          @menu.menu_items << @menu_item if @menu
           render json: @menu_item, status: :created
         else
-          render json: @menu_item.errors, status: :unprocessable_entity
+          render json: {errors: @menu_item.errors.full_messages}, status: :unprocessable_entity
         end
       end
 
@@ -31,7 +38,7 @@ module Api
         if @menu_item.update(menu_item_params)
           render json: @menu_item
         else
-          render json: @menu_item.errors, status: :unprocessable_entity
+          render json: {errors: @menu_item.errors.full_messages}, status: :unprocessable_entity
         end
       end
 
@@ -44,7 +51,7 @@ module Api
       private
 
       def set_menu
-        @menu = Menu.find(params[:menu_id])
+        @menu = Menu.find(params[:menu_id]) if params[:menu_id]
       end
 
       def set_menu_item
@@ -52,7 +59,7 @@ module Api
       end
 
       def menu_item_params
-        params.require(:menu_item).permit(:name, :menu_id, :description, :price, :available)
+        params.require(:menu_item).permit(:name, :description, :price, :available, :menu_id)
       end
     end
   end
