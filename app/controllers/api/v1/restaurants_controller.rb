@@ -3,6 +3,15 @@ module Api
     class RestaurantsController < ApplicationController
       before_action :set_restaurant, only: [:show, :update, :destroy]
 
+      def import
+        if params[:file].present?
+          result = ImportService.process_file(params[:file])
+          render json: result, status: result[:success] ? :ok : :unprocessable_entity
+        else
+          render json: {success: false, message: "Nenhum arquivo fornecido"}, status: :bad_request
+        end
+      end
+
       # GET /api/v1/restaurants
       def index
         restaurants = Restaurant.includes(menus: :menu_items).limit(5)

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :restaurants do
         resources :menus, shallow: true
+        post "import", on: :collection
       end
 
       resources :menu_items
