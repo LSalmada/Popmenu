@@ -52,4 +52,4 @@ rails test
 
 
 ## How to import data Level 03
-[a relative link](import.md)
+[Manual](import.md)
