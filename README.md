@@ -42,10 +42,17 @@ This is a Ruby on Rails application for managing restaurant menus, supporting mu
 
 ## Running Tests
 ```
-rails test
+bin/rspec
 ```
 
 ## Design Considerations
 - Used namespaced API controllers
 - Implemented validation at the model level
 - Designed for future extensibility
+
+## API Collection for Postman
+[Postman Collection](https://.postman.co/workspace/My-Workspace~bbc4ebbc-afd9-4da4-814c-f9c41ce71eb8/collection/43546751-d6a274bb-1a3c-4557-adf2-b7306cdfe525?action=share&creator=43546751)
+
+
+## How to import data Level 03
+[Manual](import.md)
