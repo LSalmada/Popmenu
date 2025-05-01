@@ -62,7 +62,7 @@ group :development, :test do
   gem "faker"
 
   # Test suite
-  gem "rspec-rails", "~> 7.1.1"
+  gem "rspec-rails", "~> 8.0.0"
 
   # Factory bot
   gem "factory_bot_rails"
